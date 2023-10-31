@@ -1,3 +1,16 @@
 .hidden {
   display: none;
 }
+
+#tim {
+  display: float;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: -20vw;
+  overflow: hidden;
+  height: 120vh;
+  width: 170vw;
+  max-height: 100%;
+}

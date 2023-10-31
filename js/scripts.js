@@ -84,14 +84,15 @@ function onMovieTimeClick(event) {
     const time = event.target.id
     const age = parseInt(document.getElementById("age").value);
     const priceResult = moviePrice(time, age);
-    console.log(document.getElementById("showtimes"))
     document.getElementById("priceResult").innerText = priceResult;
 }
 
 
 function getMovieTimes(event) {
-    document.getElementById("showtimes").innerHTML = null;
     const index = event.target.id
+    if (parseInt(index) === 2) { 
+        document.getElementById("tim").setAttribute("style", "");
+    }
     const times = movieList[index].times
     const showtimesDiv = document.getElementById("showtimes");
     const ul = document.createElement("ul");
@@ -111,6 +112,8 @@ function displayFilms(event) {
     event.preventDefault();
     document.getElementById("aboutMovie").removeAttribute("class", "hidden");
     document.getElementById("movieDiv").innerHTML = null;
+    document.getElementById("priceResult").innerText = null;
+    document.getElementById("showtimes").innerHTML = null;
     const movieDiv = document.getElementById("movieDiv");
     const movieListDiv = document.createElement("div")
     const age = parseInt(document.getElementById("age").value);
