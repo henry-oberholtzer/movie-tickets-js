@@ -1,9 +1,10 @@
 const movieList = {
+
     1: {
         movieName: "Rocky Horror Picture Show",
         rating: "R",
         times: [10, 12, 14, 16, 18, 20, 22, 24],
-        imageURL: "https://cdn.europosters.eu/image/750/posters/the-rocky-horror-picture-show-lips-i151236.jpg"
+        imageURL: "https://cdn.europosters.eu/image/750/posters/the-rocky-horror-picture-show-lips-i151236.jpg",
     },
     2: {
         movieName: "The Worst Witch",
@@ -15,7 +16,7 @@ const movieList = {
         movieName: "Muppet Treasure Island",
         rating: "G",
         times: [12, 16, 20, 24],
-        imageURL: "https://upload.wikimedia.org/wikipedia/en/a/a3/Muppettreasure.png"
+        imageURL: "https://upload.wikimedia.org/wikipedia/en/a/a3/Muppettreasure.png",
     },
     4: {
         movieName: "Congo",
@@ -54,16 +55,69 @@ const movieList = {
 function enterAge(age) {
     const movieKeys = Object.keys(movieList);
     const movieFiltered = []
-    movieKeys.forEach(function(index) {
-        if(age >= 17) {
+    movieKeys.forEach(function (index) {
+        if (age >= 17) {
             movieFiltered.push(index)
-        } else if(age > 12 && movieList[index].rating === "PG-13") {
+        } else if (age > 12 && movieList[index].rating === "PG-13") {
             movieFiltered.push(index);
-        } else if(age > 12 && movieList[index].rating === "G") {
+        } else if (age > 12 && movieList[index].rating === "G") {
             movieFiltered.push(index);
-        } else if(age <= 12 && movieList[index].rating === "G") {
+        } else if (age <= 12 && movieList[index].rating === "G") {
             movieFiltered.push(index);
         }
     });
     return movieFiltered;
 }
+    function moviePrice(event) {
+        const time = event.target.id
+    }
+
+// UI Logic
+
+function getMovieTimes(event) {
+    document.getElementById("showtimes").innerHTML = null;
+    const index = event.target.id
+    const times = movieList[index].times
+    const showtimesDiv = document.getElementById("showtimes");
+    const ul = document.createElement("ul");
+    times.forEach(function (time) {
+      const li = document.createElement("li");
+      li.addEventListener("click", moviePrice)
+      li.setAttribute("id", time)
+
+      ul.append(li);
+      li.append(time);
+    })
+    showtimesDiv.append(ul);
+    document.getElementById("aboutMovie").removeAttribute("class");
+}
+
+function displayFilms(event) {
+    event.preventDefault();
+    document.getElementById("aboutMovie").removeAttribute("class", "hidden");
+    document.getElementById("movieDiv").innerHTML = null;
+    const movieDiv = document.getElementById("movieDiv");
+    const movieListDiv = document.createElement("div")
+    const age = parseInt(document.getElementById("age").value);
+    const movieArray = enterAge(age);
+    movieArray.forEach((element) => movieListDiv.append(movieParagraphElement(element)));
+    movieDiv.append(movieListDiv);
+    movieDiv.setAttribute("class","");
+}
+
+function movieParagraphElement(element) {
+    const p = document.createElement("p");
+    const index = parseInt(element);
+    p.setAttribute("id", element);
+    const movieTitle = movieList[index].movieName;
+    p.addEventListener("click", getMovieTimes)
+    p.append(movieTitle);
+    return p
+}
+
+function interactive() {
+    const form = document.getElementById("age-form")
+    form.addEventListener("submit", displayFilms)
+}
+
+window.addEventListener("load", interactive)

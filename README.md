@@ -6,14 +6,14 @@ A JS web app by Henry Oberholtzer & Ravin Fisher
 
 ## User can enter an age (number) and recieve a list of movies
 Code: enterAge(13)
-Result: "Rocky Horror Picture Show", "Halloween Town"
+Result: "Congo", "Muppet Treasure Island"
 
-# User can enter a movie name and recieve times
-Code: enterMovie("Rocky Horror Picture Show")
-Result: "12:00", "2:00", "8:00"
+# User can enter a movie ID and recieve times
+Code: enterMovie("1")
+Result: "13:00, 16:00, 19:00, 23:00"
 
 # User can enter a time to see the movie and recieves based on age and time of showing
-Code: ticketPrice("13", "Rocky Horror Picture Show", "12:00")
+Code: ticketPrice("13", "Congo, "13:00")
 Result: $6
 
 # 
