@@ -68,11 +68,26 @@ function enterAge(age) {
     });
     return movieFiltered;
 }
-    function moviePrice(event) {
-        const time = event.target.id
-    }
+    function moviePrice(time, age) {
+        if (age >= 65) {
+          return "$8";
+        } else if (time >= 17) {
+          return "$18";
+        } else {
+          return "$10";
+        }
+    };
 
 // UI Logic
+
+function onMovieTimeClick(event) {
+    const time = event.target.id
+    const age = parseInt(document.getElementById("age").value);
+    const priceResult = moviePrice(time, age);
+    console.log(document.getElementById("showtimes"))
+    document.getElementById("priceResult").innerText = priceResult;
+}
+
 
 function getMovieTimes(event) {
     document.getElementById("showtimes").innerHTML = null;
@@ -82,7 +97,7 @@ function getMovieTimes(event) {
     const ul = document.createElement("ul");
     times.forEach(function (time) {
       const li = document.createElement("li");
-      li.addEventListener("click", moviePrice)
+      li.addEventListener("click", onMovieTimeClick)
       li.setAttribute("id", time)
 
       ul.append(li);
